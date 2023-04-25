@@ -1,0 +1,720 @@
+/**
+ * Copyright 2021 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+
+:root {
+	--base-fontsize: 0.93rem;
+	--header-scale: 1.125;
+	--line-height: 1.618;
+
+	--accent-bg: #2B2B2B;
+	--border: #666;
+	--main-bg: #000;
+}
+
+html {
+	font-family: 'Noto Sans', sans-serif;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+body {
+	background: var(--main-bg);
+	color: #bfbfbf;
+	overflow-x: hidden;
+	max-width: 77em;
+	font-size: var(--base-fontsize);
+}
+
+pre {
+	white-space: pre-line;
+}
+
+a {
+	color: #9fc6e0;
+}
+
+nav {
+	font-family: sans-serif
+}
+
+/* this prevents too large images from breaking layouts */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+li img {
+	vertical-align: top;
+}
+
+iframe {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	border-color: gray;
+	border-style: dashed;
+	border-width: 2px;
+}
+
+.page {
+	margin: 2em auto;
+	width: 35em;
+	border: 5px solid #ccc;
+	padding: 0.8em;
+	background: white;
+}
+
+.entries {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.add-entry {
+	font-size: 0.9em;
+	border-bottom: 1px solid #ccc;
+}
+
+.add-entry dl {
+	font-weight: bolder;
+}
+
+.metanav {
+	text-align: right;
+	font-size: 0.8em;
+	padding: 0.3em;
+	margin-bottom: 1em;
+	background: #fafafa;
+}
+
+.flash {
+	background: #cee5F5;
+	padding: 0.5em;
+	border: 1px solid #aacbe2;
+}
+
+.error {
+	background: #f0d6d6;
+	padding: 0.5em;
+}
+
+.logo {
+	filter: invert(1);
+	vertical-align: middle;
+	width="20" height="20";
+}
+
+.content {
+	line-height: var(--line-height);
+}
+
+#popup {
+	display: none;
+	position: absolute;
+	max-width: 60%;
+	max-height: 50%;
+	overflow: scroll;
+}
+
+/* Format headers */
+h1,
+h2,
+h3 {
+	color: #bfbfbf;
+}
+
+h1,
+h2,
+h3 {
+	font-family: 'Merriweather Sans';
+}
+
+/* Fix line height when title wraps */
+h1,
+h2,
+h3 {
+	line-height: 1.1;
+}
+
+/*
+ h1, h2, h3, h4, h5, h6 {
+		 margin-bottom: 1rem;
+ }
+ */
+
+h1 {
+	font-size: calc(var(--base-fontsize) * var(--header-scale) * var(--header-scale) * var(--header-scale) * var(--header-scale) * var(--header-scale));
+}
+
+h1:not(:first-child) {
+	margin-top: calc(var(--line-height) * 1.5rem);
+}
+
+h2 {
+	font-size: calc(var(--base-fontsize) * var(--header-scale) * var(--header-scale) * var(--header-scale));
+	margin-top: calc(var(--line-height) * 1.4rem);
+}
+
+h3 {
+	font-size: calc(var(--base-fontsize) * var(--header-scale));
+	margin-top: calc(var(--line-height) * 1.3rem);
+}
+
+h4 {
+	font-size: calc(var(--base-fontsize));
+	margin-top: calc(var(--line-height) * 1.2rem);
+}
+
+h5 {
+	font-size: calc(var(--base-fontsize) / var(--header-scale));
+	margin-top: calc(var(--line-height) * 1.1rem);
+}
+
+h6 {
+	font-size: calc(var(--base-fontsize) / var(--header-scale) / var(--header-scale));
+}
+
+.content blockquote {
+	padding-left: 0.5em;
+	margin-left: 1em;
+	border-left: 2px solid #bfbfbf;
+	font-style: italic;
+}
+
+.navigation {
+	vertical-align: middle;
+	/* border-color: gray;
+		 border-style: dotted;
+		 margin: 10px; 
+		 border-radius: 20px;
+		 padding: 10px;
+		 */
+}
+
+.navigation-links::-webkit-scrollbar {
+	display: none;
+}
+
+.navigation-links {
+	display: block;
+	vertical-align: middle;
+	align-items: center;
+	/*margin: 0 auto;*/
+	text-align: justify;
+	/* text-align: center; */
+	/* why doesn't this work? */
+	overflow-x: scroll;
+	white-space: nowrap;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+
+	/* hide scrollbar if one is needed, but allow scrolling */
+	-ms-overflow-style: none;
+	/* Internet Explorer 10+ */
+	scrollbar-width: none;
+	/* Firefox */
+}
+
+.topline-node {
+	vertical-align: middle;
+	overflow-y: auto;
+}
+
+.topline-node-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.hypothesis-adder {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+}
+
+input[type="text"] {
+	-webkit-box-sizing: border-box;
+	/* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;
+	/* Firefox, other Gecko */
+	box-sizing: border-box;
+	/* Opera/IE 8+ */
+}
+
+.topline-search {
+	display: block;
+	vertical-align: middle;
+	/* does not work, will be removed shortly */
+	overflow-y: auto;
+	margin: 10px;
+	width: auto;
+}
+
+.exec {
+	list-style-type: trad-chinese-informal;
+	/* why */
+}
+
+.topline-agora {
+	display: flex;
+	justify-content: space-between;
+	vertical-align: middle;
+	/* does not work, will be removed shortly */
+	overflow-y: auto;
+	margin: 10px;
+	width: auto;
+}
+
+.topline-query {
+	flex: auto;
+	display: inline;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.topline-cli {
+	flex: auto;
+	vertical-align: middle;
+	width: 100%;
+}
+
+#mini-cli {
+	width: 100%;
+}
+
+/*
+ @media screen and (min-width: 900px) {
+		 .navigation {
+				 width: 100%;
+				 vertical-align: middle;
+				 overflow-y: auto;
+		 }
+ }
+ */
+
+.topline-container {
+	width: 100%;
+}
+
+.cli-header {
+	margin-right: 10px;
+}
+
+.node,
+.context,
+.stoa,
+.ctzn,
+.search {
+	/*border-color: #7f5af0;*/
+	border-color: gray;
+	border-style: solid;
+	border-width: 1px;
+	/*border-style: dotted;*/
+	margin: 10px;
+	/*border-radius: 20px;*/
+	padding: 10px;
+}
+
+.left {
+	border-color: red;
+}
+
+.right {
+	border-color: blue;
+}
+
+.pulled-node {
+	/*border-color: #7f5af0;*/
+	border-color: gray;
+	border-width: 1px;
+	border-style: solid;
+	/*border-style: dotted;*/
+	margin: 10px;
+	/*border-radius: 20px;*/
+	padding: 10px;
+}
+
+.related-node {
+	/*border-color: #7f5af0;*/
+	border-color: gray;
+	border-width: 1px;
+	border-style: solid;
+	margin: 10px;
+	/*border-radius: 20px;*/
+	padding: 10px;
+}
+
+.image-embed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	max-height: 600px;
+}
+
+.obsidian-embed {
+	text-align: center;
+	font-style: italic;
+}
+
+.subnode,
+.links,
+.not-found {
+	background: #1f232b;
+	/* background: #12091a; */
+	/* background: #150d38; */
+	color: #cfcfcf;
+	padding: 10px;
+	margin: 10px;
+	/*border-radius: 20px;*/
+}
+
+.pulled-subnode,
+.pushed-subnode,
+.stoa-public {
+	background: #101010;
+	color: #cfcfcf;
+	padding: 10px;
+	margin: 10px;
+	/*border-radius: 20px;*/
+}
+
+.node-header,
+.context-header,
+.stoa-header,
+.ctzn-header {
+	display: flex;
+	text-align: left;
+	margin-left: 10px;
+	font-weight: bolder;
+	padding-bottom: 2px;
+}
+
+.not-found {
+	/*background: #476349;*/
+	background: #476353;
+}
+
+/*.subnode li     { margin: 0.8em 1.2em; }*/
+/*.subnode li h2  { margin-left: -1em; }*/
+
+.subnode-header,
+.links-header,
+.search-header,
+.subnode-id {
+	font-weight: bolder;
+	width: 100%;
+	display: flex;
+	padding-bottom: 2px;
+}
+
+.subnode-header {
+	border-bottom: 1px solid #ccc;
+}
+
+.subnode-footer,
+.node-footer {
+	font-size: smaller;
+	font-weight: bolder;
+	width: 100%;
+	display: flex;
+	padding-top: 6px;
+	border-top: 1px solid #ccc;
+	text-align: left;
+}
+
+.subnode-contrib {
+	text-align: right;
+	text-decoration: none;
+	max-width: 19%;
+	margin-left: auto;
+}
+
+.footer-links,
+.footer-id {
+	text-align: right;
+	margin-left: auto;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.node-actions {
+	text-align: right;
+	text-decoration: none;
+	max-width: 19%;
+	margin-left: auto;
+}
+
+.subnode-id {
+	max-width: 81%;
+}
+
+.subnode-id a {
+	text-decoration: none;
+}
+
+.search {
+	overflow: auto;
+	gap: 10px;
+	max-height: 600px;
+}
+
+.search-agora-header,
+.search-internet-header {
+	font-weight: bolder;
+}
+
+.links-flex {
+	display: flex;
+}
+
+.listing-flex {
+	display: flex;
+}
+
+.flex {
+	display: flex;
+}
+
+.search-flex {
+	display: flex;
+}
+
+.infobox {
+	width: 50%
+}
+
+.subnodes {
+	width: 50%
+}
+
+.links {
+	overflow: auto;
+	gap: 10px;
+	max-height: 400px;
+}
+
+.annotations {
+	width: 100%;
+	display: flex;
+	background: #080808;
+	color: #cfcfcf;
+	padding: 0.5em;
+	margin-bottom: 10px;
+	/*border-radius: 10px;*/
+	gap: 10px;
+}
+
+.delta {
+	width: 100%;
+	display: flex;
+	background: #080808;
+	color: #cfcfcf;
+	padding: 0.5em;
+	margin-bottom: 10px;
+	/*border-radius: 10px;*/
+	gap: 10px;
+}
+
+.delta-nodes {
+	float: left;
+	width: 100%;
+}
+
+.delta-annotations {
+	background: #080808;
+	float: left;
+	width: 100%;
+}
+
+.backlinks {
+	float: left;
+	width: 33%;
+}
+
+.pushlinks {
+	width: 33%;
+}
+
+.pulllinks {
+	width: 33%;
+}
+
+.forwardlinks {
+	width: 33%;
+}
+
+.backlinks-header,
+.pushlinks-header,
+.pulllinks-header,
+.forwardlinks-header {
+	font-style: italic;
+}
+
+#graph {
+	overflow: hidden;
+	/*border-radius: 20px;*/
+	padding: 10px;
+	margin: 10px;
+	max-width: 900px;
+	max-height: 400px;
+}
+
+#agoragraph {
+	overflow: hidden;
+	/*border-radius: 20px;*/
+	padding: 10px;
+	margin: 10px;
+	max-width: 900px;
+	max-height: 600px;
+}
+
+
+
+.search-header {
+	font-weight: bolder;
+	text-align: left;
+	margin-bottom: 1em;
+	margin-left: 0.2em;
+}
+
+.search-agora {
+	float: right;
+	width: 100%;
+}
+
+.search-internet {
+	float: left;
+	width: 35%;
+}
+
+.listing {
+	display: inline-block;
+	padding: 0.5em;
+	/*margin-bottom: 10px;*/
+	/*border-radius: 10px;*/
+}
+
+.wikilink-marker {
+	/* deemphasize */
+	font-weight: lighter;
+	display: none;
+}
+
+.wikilink:link {
+	/* different color for wikilinks */
+	color: deepskyblue;
+}
+
+.wikilink:visited {
+	/* different color for wikilinks */
+	color: deepskyblue;
+}
+
+.wikilink:hover {
+	/* different color for wikilinks */
+	color: hotpink;
+}
+
+/*
+	* doesn't work super well, sometimes forces a loop when the link is near a line break
+ .wikilink:hover:before {
+	 content: "[["
+ }
+ 
+ .wikilink:hover:after {
+	 content: "]]"
+ }
+ */
+
+
+
+/* hypothes.is 
+		 This totally doesn't work at all, and I have no idea why :) 
+ */
+.annotator-frame {
+	margin-top: 4.5em
+}
+
+
+.submit {
+	display: block;
+	margin-top: 25px
+}
+
+/** 
+ * overriding bmann's microblog hardcoded style
+ * is this sustainable? probably no.
+ */
+.microblog_timeline {
+	background: #1f232b;
+	color: #cfcfcf;
+}
+
+
+#login-box,
+#logout-box {
+	display: none;
+}
+
+#ctzn-login {
+	text-align: right;
+}
+
+#focus-hack {
+	display: none;
+}
+
+#ctzn-login {
+	margin-top: 20px;
+}
+
+/* Format tables.  Based on https://github.com/kevquirk/simple.css/. */
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	margin: 1.5rem 0;
+}
+
+td,
+th {
+	border: 1px solid var(--border);
+	padding: .5rem;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	text-align: left;
+}
+
+th {
+	background: var(--accent-bg);
+	font-weight: bold;
+}
+
+tr:nth-child(even) {
+	/* Set every other cell slightly darker. Improves readability. */
+	background: var(--accent-bg);
+}
+
+table caption {
+	font-weight: bold;
+	margin-bottom: .5rem;
+}
