@@ -8,7 +8,7 @@
 	{#await $page.data.string then people}
 		<meta name="description" content={people} />
 	{/await}
-	<title>[[{$page.params.name}]]</title>
+	<title>[[{$page.params.name || $page.data.node}]]</title>
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link

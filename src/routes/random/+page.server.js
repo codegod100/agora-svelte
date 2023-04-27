@@ -1,10 +1,11 @@
+import fs from 'fs';
+import { files } from '$lib/files.ts'
 import { GARDEN } from '$env/static/private';
 import { unified } from 'unified';
 import markdown from 'remark-parse';
 import wikiLinkPlugin from 'remark-wiki-link';
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import { files } from '$lib/files.ts'
 
 let processor = unified()
 	.use(markdown, { gfm: true })
@@ -12,29 +13,18 @@ let processor = unified()
 	.use(remarkRehype)
 	.use(rehypeStringify)
 
-import fs from 'fs';
-
-
-
-
 export const load = ({ params }) => {
-
-
+	params.name = ""
 	let m = files({ garden: GARDEN, node: params.name });
-	console.log(m)
-	let d = []
-	for (const path in m) {
-		const user = path.replace(GARDEN + "/", '')
-		const files = m[path]
-		for (const file of files) {
-			console.log(file)
-			let data = fs.readFileSync(path + "/" + file, 'utf8')
-			data = String(processor.processSync(data))
-			console.log(data)
-			d.push({ node: params.name, data, path: path + '/' + file, user })
-		}
-	}
+	const directories = Object.keys(m);
+	const path = directories[Math.floor(Math.random() * directories.length)];
+	const nodes = m[path];
+	const file = nodes[Math.floor(Math.random() * nodes.length)];
+	const user = path.replace(GARDEN + "/", '')
 
-	return { files: d }
+	let data = fs.readFileSync(path + "/" + file, 'utf8')
+	data = String(processor.processSync(data))
+
+
+	return { node: file.replace(".md", ""), files: [{ node: file.replace(".md", ""), data, path: path + '/' + file, user }] }
 }
-
