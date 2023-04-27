@@ -16,7 +16,7 @@
 			|
 			<a href="/today" style="text-decoration: none;">📅&nbsp;today</a>
 			|
-			<a data-sveltekit-reload href="/random" style="text-decoration: none;">🎲️&nbsp;random</a>
+			<a href="/random" style="text-decoration: none;">🎲️&nbsp;random</a>
 			|
 			<a href="/users" style="text-decoration: none;">🫂&nbsp;users</a>
 			|
