@@ -10,6 +10,7 @@ export const load = ({ params }) => {
 	const path = directories[Math.floor(Math.random() * directories.length)];
 	const nodes = m[path];
 	const file = nodes[Math.floor(Math.random() * nodes.length)];
+	console.log("FILE", m, directories, path, nodes, file)
 	const nodeName = file.replace(".md", "")
 	throw redirect(307, '/node/' + nodeName)
 }

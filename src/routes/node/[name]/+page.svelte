@@ -1,6 +1,5 @@
 <script>
 	export let data;
-	console.log('DATA', data);
 	import { page } from '$app/stores';
 </script>
 

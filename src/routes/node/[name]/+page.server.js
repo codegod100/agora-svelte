@@ -19,22 +19,19 @@ import fs from 'fs';
 
 export const load = ({ params }) => {
 
-
+	// console.log("node", params.name)
 	let m = files({ garden: GARDEN, node: params.name });
-	console.log("M", m)
+	// console.log("M", m)
 	let d = []
 	for (const path in m) {
 		const user = path.replace(GARDEN + "/", '')
 		const files = m[path]
 		for (const file of files) {
-			console.log(file)
 			let data = fs.readFileSync(path + "/" + file, 'utf8')
 			data = String(processor.processSync(data))
-			console.log(data)
 			d.push({ node: params.name, data, path: path + '/' + file, user })
 		}
 	}
-
 	return { files: d }
 }
 
