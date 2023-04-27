@@ -1,13 +1,12 @@
 import fs from 'fs';
 
+const directoryToMdFiles = {};
 export const files = ({ garden, node }) => {
 	// console.log("GARDEN", garden)
 	// Get the list of directories in the current directory.
 	const directories = fs.readdirSync(garden);
 
 	// Create an empty object to store the mapping of directory names to lists of ".md" files.
-	const directoryToMdFiles = {};
-
 	// Iterate over the directories.
 	for (let directory of directories) {
 
@@ -21,13 +20,10 @@ export const files = ({ garden, node }) => {
 
 			// Add the directory name and the list of ".md" files to the mapping.
 			directoryToMdFiles[directory] = mdFiles;
-
 			// Recursively go through the directory.
 			files({ garden: directory, node });
 		}
 	}
-	console.log("MAP", directoryToMdFiles)
-
 	// Return the mapping of directory names to lists of ".md" files.
 	return directoryToMdFiles;
 }

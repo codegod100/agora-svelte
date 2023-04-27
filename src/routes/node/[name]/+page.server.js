@@ -21,7 +21,7 @@ export const load = ({ params }) => {
 
 
 	let m = files({ garden: GARDEN, node: params.name });
-	console.log(m)
+	console.log("M", m)
 	let d = []
 	for (const path in m) {
 		const user = path.replace(GARDEN + "/", '')
