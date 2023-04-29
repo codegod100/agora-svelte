@@ -19,9 +19,11 @@ let processor = unified()
 
 export const load = ({ params }) => {
 	const u = users();
-	const s = subnodes(GARDEN + "/vera", [], "vera");
-	const t = subnodes(GARDEN + "/flancian", [], "flancian");
-	const j = journals(s.concat(t));
+	let subs = []
+	for (const user of u) {
+		subs = subs.concat(subnodes(GARDEN + "/" + user, [], user))
+	}
+	const j = journals(subs)
 	let nodes = []
 	for (const name in j) {
 		if (name != "undefined") {

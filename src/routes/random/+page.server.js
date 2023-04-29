@@ -1,16 +1,15 @@
-import { subnodes } from '$lib/files.ts'
 import { GARDEN } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
-
+import { subnodes, users, journals } from '$lib/files.ts'
 
 export const load = ({ params }) => {
 	params.name = ""
-	let m = subnodes({ garden: GARDEN, node: params.name });
-	const directories = Object.keys(m);
-	const path = directories[Math.floor(Math.random() * directories.length)];
-	const nodes = m[path];
-	const file = nodes[Math.floor(Math.random() * nodes.length)];
-	console.log("FILE", m, directories, path, nodes, file)
-	const nodeName = file.replace(".md", "")
-	throw redirect(307, '/node/' + nodeName)
+
+	const u = users();
+	let subs = []
+	for (const user of u) {
+		subs = subs.concat(subnodes(GARDEN + "/" + user, [], user))
+	}
+	const sub = subs[Math.floor(Math.random() * subs.length)];
+	throw redirect(307, '/node/' + sub.node)
 }

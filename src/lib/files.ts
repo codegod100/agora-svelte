@@ -40,6 +40,16 @@ export const journals = (subnodes: Subnode[]) => {
 	return s
 }
 
+export const nodeFilter = (subnodes: Subnode[], node: string) => {
+	let subs = []
+	for (const sub of subnodes) {
+		if (sub.node == node) {
+			subs.push(sub)
+		}
+	}
+	return subs
+}
+
 export const subnodes = (dirPath, arrayOfFiles: Subnode[], user): Subnode[] => {
 	const files = fs.readdirSync(dirPath)
 
