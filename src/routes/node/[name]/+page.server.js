@@ -4,7 +4,7 @@ import markdown from 'remark-parse';
 import wikiLinkPlugin from 'remark-wiki-link';
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import { files } from '$lib/files.ts'
+import { subnodes } from '$lib/files.ts'
 
 let processor = unified()
 	.use(markdown, { gfm: true })
@@ -20,7 +20,7 @@ import fs from 'fs';
 export const load = ({ params }) => {
 
 	// console.log("node", params.name)
-	let m = files({ garden: GARDEN, node: params.name });
+	let m = subnodes({ garden: GARDEN, node: params.name });
 	// console.log("M", m)
 	let d = []
 	for (const path in m) {

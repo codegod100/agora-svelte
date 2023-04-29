@@ -1,11 +1,11 @@
-import { files } from '$lib/files.ts'
+import { subnodes } from '$lib/files.ts'
 import { GARDEN } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
 
 
 export const load = ({ params }) => {
 	params.name = ""
-	let m = files({ garden: GARDEN, node: params.name });
+	let m = subnodes({ garden: GARDEN, node: params.name });
 	const directories = Object.keys(m);
 	const path = directories[Math.floor(Math.random() * directories.length)];
 	const nodes = m[path];

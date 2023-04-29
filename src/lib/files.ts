@@ -1,37 +1,60 @@
 import fs from 'fs';
-import { construct_svelte_component } from 'svelte/internal';
+import path from 'path'
+import { GARDEN } from '$env/static/private';
 
-
-export const files =({ garden, node }) => {
-	const directoryToMdFiles = {};
-const retrieve = ({ garden, node }) => {
-	// console.log("GARDEN", garden)
-	// Get the list of directories in the current directory.
-	const directories = fs.readdirSync(garden);
-
-	// Create an empty object to store the mapping of directory names to lists of ".md" files.
-	// Iterate over the directories.
-	for (let directory of directories) {
-
-		directory = garden + "/" + directory
-		// console.log("DIR", directory)
-		// If the directory is a directory, recursively go through it.
-		if (fs.statSync(directory).isDirectory()) {
-			// Get the list of ".md" files in the directory.
-			const mdFiles = fs.readdirSync(directory).filter(file => file.endsWith('.md') && file.includes(node));
-
-			// Add the directory name and the list of ".md" files to the mapping.
-			if(mdFiles.length > 0) {
-				console.log("MDFILES", mdFiles)
-				directoryToMdFiles[directory] = mdFiles;
-			}
-			// Recursively go through the directory.
-			retrieve({ garden: directory, node });
-		}
-	}
-	// Return the mapping of directory names to lists of ".md" files.
-	return directoryToMdFiles;
+interface Lookup {
+	/** node name */
+	node: Node,
+	journal: boolean // is this a journal?
 }
 
-return retrieve({ garden, node });
+export interface Subnode {
+	path: string,
+	node: string,
+	user: string,
+	data: string
+}
+
+
+
+
+
+export const users = (): string[] => {
+	return fs.readdirSync(GARDEN).filter(file => fs.statSync(GARDEN + "/" + file).isDirectory());
+}
+
+const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[]) => string) =>
+	array.reduce((acc, value, index, array) => {
+		(acc[predicate(value, index, array)] ||= []).push(value);
+		return acc;
+	}, {} as { [key: string]: T[] });
+
+export const journals = (subnodes: Subnode[]) => {
+	let nodes = []
+
+	const s = groupBy(subnodes, v => {
+		if (/^(\d{4})-(\d{2})-(\d{2})$/.test(v.node)) {
+			return v.node
+		}
+	})
+	return s
+}
+
+export const subnodes = (dirPath, arrayOfFiles: Subnode[], user): Subnode[] => {
+	const files = fs.readdirSync(dirPath)
+
+	arrayOfFiles = arrayOfFiles || []
+
+	files.forEach(function (file) {
+		const fullPath = path.join(dirPath, "/", file)
+		if (fs.statSync(fullPath).isDirectory()) {
+			arrayOfFiles = subnodes(dirPath + "/" + file, arrayOfFiles, user)
+		} else {
+			if (file.endsWith(".md")) {
+				arrayOfFiles.push({ path: fullPath, node: file.replace(".md", ""), user, data: "" })
+			}
+		}
+	})
+
+	return arrayOfFiles
 }
