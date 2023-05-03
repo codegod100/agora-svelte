@@ -2,12 +2,14 @@ import { GARDEN } from '$env/static/private';
 import { unified } from 'unified';
 import markdown from 'remark-parse';
 import wikiLinkPlugin from 'remark-wiki-link';
+import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import { subnodes, users, nodeFilter } from '$lib/files.ts'
 
 let processor = unified()
-	.use(markdown, { gfm: true })
+	.use(markdown)
+	.use(remarkGfm)
 	.use(wikiLinkPlugin, { hrefTemplate: (link) => `/node/${link}`, pageResolver: (link) => [link] })
 	.use(remarkRehype)
 	.use(rehypeStringify)
