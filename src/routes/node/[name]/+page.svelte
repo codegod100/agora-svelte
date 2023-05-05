@@ -15,12 +15,13 @@
 	</div>
 	{#if data.files.length == 0}
 		<iframe
+			title="wikipedia"
 			id="exec-wp"
 			src="https://en.wikipedia.org/wiki/{$page.params.name}"
 			style="max-width: 100%;"
 			width="99%"
 			height="800px"
-			allowfullscreen="allowfullscreen"
+			allow="fullscreen"
 		/>
 	{/if}
 	{#each data.files as file}
