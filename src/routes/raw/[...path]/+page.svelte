@@ -8,5 +8,5 @@
 <div class="subnode">
 	<div class="subnode-header">{$page.params.path}</div>
 	<div>{@html data.body}</div>
-	<div><pre>{data.raw}</pre></div>
+	<div>{@html data.raw}</div>
 </div>

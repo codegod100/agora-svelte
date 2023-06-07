@@ -45,7 +45,8 @@ body {
 }
 
 pre {
-	white-space: pre-line;
+	/* white-space: pre-line; */
+	tab-size: 4;
 }
 
 a {
