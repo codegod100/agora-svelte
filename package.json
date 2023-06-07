@@ -2,7 +2,7 @@
 	"name": "web",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -42,5 +42,6 @@
 		"remark-rehype": "^10.1.0",
 		"remark-wiki-link": "^1.0.4",
 		"unified": "^10.1.2"
-	}
+	},
+	"packageManager": "yarn@3.6.0"
 }
