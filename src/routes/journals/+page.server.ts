@@ -42,5 +42,5 @@ export const load = ({ params }) => {
 		}
 	}
 	// console.log("journals", j)
-	return { users: u, nodes }
+	return { users: u, nodes, node: "journals" }
 }

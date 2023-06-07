@@ -9,6 +9,7 @@ interface Lookup {
 }
 
 export interface Subnode {
+	relPath: string,
 	path: string,
 	node: string,
 	user: string,
@@ -85,7 +86,7 @@ export const subnodes = (dirPath: string, arrayOfFiles: Subnode[], user: string)
 			arrayOfFiles = subnodes(dirPath + "/" + file, arrayOfFiles, user)
 		} else {
 			if (file.endsWith(".md")) {
-				arrayOfFiles.push({ path: fullPath, node: file.replace(".md", ""), user, data: "" })
+				arrayOfFiles.push({ relPath: fullPath.replace(GARDEN, ""), path: fullPath, node: file.replace(".md", ""), user, data: "" })
 			}
 		}
 	})

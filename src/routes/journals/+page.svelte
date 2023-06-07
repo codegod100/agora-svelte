@@ -8,7 +8,7 @@
 		<div class="node-header main-header">
 			<span
 				>📚 Node <a
-					href="/index"
+					href="/node/{node.name}"
 					title="A node is a collection of resources with a matching name or an explicit relationship to a context."
 					>[[{node.name}]]</a
 				>

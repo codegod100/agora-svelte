@@ -30,7 +30,7 @@
 				<span class="subnode-id">
 					<span class="subnode-links">
 						<a href="@agora/index" title="subnode index.md">📓</a>
-						<a href="/raw/index.md"><tt title="index.md">{file.path}</tt></a> (text) by
+						<a href="/raw/{file.relPath}"><tt title="index.md">{file.relPath}</tt></a> (text) by
 						<a href="/@agora">@<span class="subnode-user">{file.user}</span></a>
 					</span>
 				</span>
